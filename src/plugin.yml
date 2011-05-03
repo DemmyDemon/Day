@@ -1,0 +1,3 @@
+name: Day
+main: com.webkonsept.bukkit.day.Day
+version: 0.1
