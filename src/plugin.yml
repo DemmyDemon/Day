@@ -1,3 +1,21 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
-version: 0.1
+version: 0.2
+website: http://minecraft.webkonsept.com/
+author: Fredrik Vold
+database: false
+description: >
+        Manipulates the rotation of the planet!
+commands:
+    day:
+        aliases: 
+        description: Summons the daystar
+        usage: /<command> (takes no arguments)
+    night:
+        aliases:
+        description: Plunges the world into darkness
+        usage: /<command> (takes no arguments)
+    reloadserver:
+        aliases:
+        description: Reloads the server
+        usage: /<command> (takes no arguments)
