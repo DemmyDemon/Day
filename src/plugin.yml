@@ -15,7 +15,3 @@ commands:
         aliases:
         description: Plunges the world into darkness
         usage: /<command> (takes no arguments)
-    reloadserver:
-        aliases:
-        description: Reloads the server
-        usage: /<command> (takes no arguments)

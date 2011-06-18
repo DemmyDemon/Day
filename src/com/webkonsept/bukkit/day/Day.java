@@ -40,7 +40,7 @@ public class Day extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (!this.isEnabled()) return false;
 		
-		if (command.getName().equalsIgnoreCase("/day")){
+		if (command.getName().equalsIgnoreCase("day")){
 			if (sender instanceof Player){
 				Player player = (Player) sender;
 				if (this.permit(player, "day.command.day")){
@@ -57,11 +57,12 @@ public class Day extends JavaPlugin {
 				while (worlds.hasNext()){
 					World world = worlds.next();
 					world.setTime(250);
+					sender.sendMessage(world.getName()+" bathed in sunlight");
 				}
-				return true;
 			}
+			return true;
 		}
-		else if (command.getName().equalsIgnoreCase("/night")){
+		else if (command.getName().equalsIgnoreCase("night")){
 			if (sender instanceof Player){
 				Player player = (Player) sender;
 				if (this.permit(player, "day.command.night")){
@@ -71,34 +72,21 @@ public class Day extends JavaPlugin {
 				else {
 					player.sendMessage("Sorry!  Permission to force the sun down denied!");
 				}
-				return true;
 			}
 			else {
 				Iterator<World> worlds = this.getServer().getWorlds().iterator();
 				this.getServer().broadcastMessage(ChatColor.DARK_PURPLE+"World plunged into darkness from console");
 				while (worlds.hasNext()){
 					World world = worlds.next();
-					world.setTime(14250);
+					world.setTime(14250); 
+					sender.sendMessage(world.getName()+" plunged into darkness");
 				}
-				return true;
 			}
-		}
-		else if (command.getName().equalsIgnoreCase("/reloadserver")){
-			if (sender instanceof Player){
-				sender.sendMessage("Sorry, please do that from the console!");
-				return false;
-			}
-			else {
-				sender.sendMessage("Reloading!");
-				this.getServer().reload();
-				return true;
-			}
+			return true;
 		}
 		else {
 			return false;
 		}
-		
-		return false; // Fuck you, Java.  This will never ever be executed!
 	}
 	public boolean permit(Player player,String permission){ 
 		boolean allow = false; // Default to GTFO
