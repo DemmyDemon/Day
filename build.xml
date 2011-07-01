@@ -3,7 +3,7 @@
 <!DOCTYPE project [
        <!ENTITY common SYSTEM "common.xml">
 ]>
-<project name="Day" default="buildJar">
+<project name="Day" default="deploy">
 	<path id="class.path">
 		<fileset dir="./libs/" includes="*.jar" />
   	</path>
@@ -36,5 +36,17 @@
 			tofile="W:/server/plugins/${ant.project.name}.jar"
 		/>
 	</target>
+	<target name="testing" depends="jar,clean">
+		<copy
+			file="${ant.project.name}.jar"
+			tofile="C:/Users/Fredrik/Desktop/Minecraft/Server/plugins/${ant.project.name}.jar"
+		/>
+	</target>
+   <target name="publish" depends="clean,jar">
+        <copy
+          file="${ant.project.name}.jar"
+          tofile="W:/publish/${ant.project.name}.jar"
+        />
+    </target>
   	<target name="buildJar" depends="jar,clean" />
 </project>

@@ -19,13 +19,16 @@ public class DayPlayerListener extends PlayerListener {
 			Player player = event.getPlayer();
 			if (player.getItemInHand().getType().equals(Material.WATCH)){
 				World world = player.getWorld();
-				if (world.getTime() <= 1400 && plugin.permit(player, "day.item.night")){
+				if ((world.getTime() > 250 && world.getTime() < 14250) && plugin.permit(player, "day.item.night")){
 					plugin.getServer().broadcastMessage(ChatColor.DARK_PURPLE+player.getName()+" plunged the world into darkness");
 					plugin.getServer().getWorld(player.getWorld().getName()).setTime(14250);
 				}
 				else if (plugin.permit(player, "day.item.day")){
 					plugin.getServer().broadcastMessage(ChatColor.DARK_PURPLE+player.getName()+" summoned the daystar");
 					plugin.getServer().getWorld(player.getWorld().getName()).setTime(250);
+				}
+				else {
+					player.sendMessage(ChatColor.DARK_PURPLE+"Permission denied.  Time setting too fast?");
 				}
 			}
 		}
