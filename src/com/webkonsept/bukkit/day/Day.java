@@ -9,8 +9,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.nijiko.permissions.PermissionHandler;
@@ -34,7 +37,14 @@ public class Day extends JavaPlugin {
 		if(!usePermissions){
 			fallbackPermissions.put("day.command.day",false);
 			fallbackPermissions.put("day.command.night",false);
+			fallbackPermissions.put("day.item.day", false);
+			fallbackPermissions.put("day.item.night", false);
 		}
+		DayPlayerListener playerListener = new DayPlayerListener(this);
+		
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvent(Event.Type.PLAYER_INTERACT,playerListener,Priority.Normal,this);
+		
 		this.out("Enabled");
 	}
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
