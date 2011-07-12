@@ -1,11 +1,11 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
 version: 0.3
-website: http://minecraft.webkonsept.com/plugins/details/Day.jar
+branch: stable
+thread: http://forums.bukkit.org/threads/Day.24011/
+website: http://minecraft.webkonsept.com/plugins/details/Day.html
 location: http://minecraft.webkonsept.com/plugins/download/Day.jar
-author: DemmyDemon
 database: false
-description: Manipulates the rotation of the planet, turning night into day!
 commands:
     day:
         aliases: 
@@ -15,9 +15,15 @@ commands:
         aliases:
         description: Plunges the world into darkness
         usage: /<command> (takes no arguments)
-bukget: true
-build:
-    min: 953
-    max: 953
-categories:
-    - MECH
+generators: [bukget]
+categories: [MECH]
+description: Manipulates the rotation of the planet, turning night into day!
+maintainer: DemmyDemon
+authors: [DemmyDemon]
+conflicts: []
+required: []
+optional: [Permissions]
+engines:
+    craftbukkit:
+        min: 935
+        max: 953
