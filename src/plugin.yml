@@ -1,6 +1,6 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
-version: 0.3
+version: 0.5
 branch: stable
 thread: http://forums.bukkit.org/threads/Day.24011/
 website: http://minecraft.webkonsept.com/plugins/details/Day.html
@@ -15,6 +15,18 @@ commands:
         aliases:
         description: Plunges the world into darkness
         usage: /<command> (takes no arguments)
+permissions:
+    day.*:
+        description: Gives full access
+        children:
+            day.command.day: true
+            night.command.night: true
+    day.command.day:
+        description: Gives access to the /day command
+        default: op
+    day.command.night:
+        description: Gives access to the /night command
+        default: op 
 generators: [bukget]
 categories: [MECH]
 description: Manipulates the rotation of the planet, turning night into day!
@@ -22,8 +34,9 @@ maintainer: DemmyDemon
 authors: [DemmyDemon]
 conflicts: []
 required: []
-optional: [Permissions]
+optional: [Spout,Permissions]
+softdepend: [Spout,Permissions]
 engines:
     craftbukkit:
-        min: 935
-        max: 953
+        min: 1000
+        max: 1060
