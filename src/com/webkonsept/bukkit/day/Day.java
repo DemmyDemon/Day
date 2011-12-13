@@ -4,26 +4,15 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spoutapi.SpoutManager;
-import org.getspout.spoutapi.player.SpoutPlayer;
-
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class Day extends JavaPlugin {
 	private Logger log = Logger.getLogger("Minecraft");
-	private PermissionHandler Permissions;
-	private boolean usePermissions = false;
-	private boolean useSpout = false; 
 	private HashMap<String,Long> lastUsed = new HashMap<String,Long>();
 	
 	@Override
@@ -33,15 +22,7 @@ public class Day extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		usePermissions = setupPermissions();
-		PluginManager pm = getServer().getPluginManager();
-		if (pm.isPluginEnabled("Spout")){
-			useSpout = true;
-			this.out("Enabled, with Spout support");
-		}
-		else {
-			this.out("Enabled");
-		}
+		this.out("Enabled");
 	}
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (!this.isEnabled()) return false;
@@ -51,7 +32,7 @@ public class Day extends JavaPlugin {
 				Player player = (Player) sender;
 				
 				if (this.permit(player, "day.command.day")){
-					broadcast(player.getName(),"summoned the daystar");
+					broadcast(player,"summoned the daystar");
 					player.getWorld().setTime(250);
 				}
 				else {
@@ -71,7 +52,7 @@ public class Day extends JavaPlugin {
 			if (sender instanceof Player){
 				Player player = (Player) sender;
 				if (this.permit(player, "day.command.night")){
-					broadcast(player.getName(),"banished the light");
+					broadcast(player,"banished the light");
 					player.getWorld().setTime(14250);
 				}
 				else {
@@ -91,20 +72,9 @@ public class Day extends JavaPlugin {
 			return false;
 		}
 	}
-	public void broadcast(String playerName,String whatHeDid){
-		for (Player player : getServer().getOnlinePlayers()){
-			if (useSpout){
-				SpoutPlayer sPlayer = SpoutManager.getPlayer(player);
-				if (sPlayer.isSpoutCraftEnabled()){
-					sPlayer.sendNotification(playerName, whatHeDid, Material.PORTAL);
-				}
-				else {
-					player.sendMessage(ChatColor.DARK_PURPLE+playerName+" "+whatHeDid);
-				}
-			}
-			else {
-				player.sendMessage(ChatColor.DARK_PURPLE+playerName+" "+whatHeDid);
-			}
+	public void broadcast(Player player,String whatHeDid){
+		for (Player playerOnline : player.getWorld().getPlayers()){
+			playerOnline.sendMessage(ChatColor.DARK_PURPLE+player.getName()+" "+whatHeDid);
 		}
 	}
 	public boolean permit(Player player,String permission){ 
@@ -118,27 +88,12 @@ public class Day extends JavaPlugin {
 			lastUsed.put(player.getName(),System.currentTimeMillis());
 		}
 		
-		if ( usePermissions ){
-			if (Permissions.has(player,permission)){
-				allow = true;
-			}
-		}
-		else if (player.hasPermission(permission)){
+		if (player.hasPermission(permission)){
 			allow = true;
 		}
 		
 		if (timeOK){
 			return allow;
-		}
-		else {
-			return false;
-		}
-	}
-	private boolean setupPermissions() {
-		Plugin test = this.getServer().getPluginManager().getPlugin("Permissions");
-		if (test != null){
-			this.Permissions = ((Permissions)test).getHandler();
-			return true;
 		}
 		else {
 			return false;

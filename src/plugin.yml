@@ -34,9 +34,9 @@ maintainer: DemmyDemon
 authors: [DemmyDemon]
 conflicts: []
 required: []
-optional: [Spout,Permissions]
-softdepend: [Spout,Permissions]
+optional: []
+softdepend: []
 engines:
     craftbukkit:
-        min: 1000
-        max: 1060
+        min: 1597
+        max: 1597
