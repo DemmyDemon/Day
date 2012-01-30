@@ -39,4 +39,4 @@ softdepend: []
 engines:
     craftbukkit:
         min: 1818
-        max: 1818
+        max: 1845
