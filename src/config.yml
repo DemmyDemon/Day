@@ -1,0 +1,12 @@
+verbose: false
+throttleSeconds: 10 
+morning: 250
+evening: 14250
+strings:
+    playerSummon: summoned the daystar
+    playerBanish: banished the light
+    playerThrottle: Denied! Switching too fast!
+    consoleSummon: The Daystar was summoned in all worlds.
+    consoleBanish: All worlds plunged into darkness.
+    commandDenied: Permission denied!
+    commandReloaded: Reloaded configuration!
