@@ -1,6 +1,6 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
-version: 0.6
+version: 0.6.2
 branch: stable
 thread: http://forums.bukkit.org/threads/Day.24011/
 website: http://minecraft.webkonsept.com/plugins/details/Day.html
@@ -8,15 +8,12 @@ location: http://minecraft.webkonsept.com/plugins/download/Day.jar
 database: false
 commands:
     day:
-        aliases: 
         description: Summons the daystar
         usage: /<command> (takes no arguments)
     dayreload:
-        aliases:
         description: Reloads configuration
         usage: /<command> (takes no arguments)
     night:
-        aliases:
         description: Plunges the world into darkness
         usage: /<command> (takes no arguments)
 permissions:
@@ -44,7 +41,3 @@ categories: [MECH]
 description: Manipulates the rotation of the planet, turning night into day!
 maintainer: DemmyDemon
 authors: [DemmyDemon]
-conflicts: []
-required: []
-optional: []
-softdepend: []
