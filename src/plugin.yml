@@ -1,7 +1,7 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
-version: 0.6.2
-branch: stable
+version: 0.7.0-beta1
+branch: unstable
 thread: http://forums.bukkit.org/threads/Day.24011/
 website: http://minecraft.webkonsept.com/plugins/details/Day.html
 location: http://minecraft.webkonsept.com/plugins/download/Day.jar

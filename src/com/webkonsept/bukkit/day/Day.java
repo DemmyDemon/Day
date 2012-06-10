@@ -34,7 +34,10 @@ public class Day extends JavaPlugin {
 	}
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (!this.isEnabled()) return false;
-		
+
+        boolean broadcastMessages = cfg.get().getBoolean("broadcastMessages",true);
+        boolean stfu = cfg.get().getBoolean("stfu",false);
+
 		if (command.getName().equalsIgnoreCase("day")){
 		    int morning = cfg.get().getInt("morning",250);
 			if (sender instanceof Player){
@@ -57,7 +60,15 @@ public class Day extends JavaPlugin {
 				for (World world : getServer().getWorlds()){
 					world.setTime(morning);
 				}
-				getServer().broadcastMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleSummon"));
+                if (stfu){
+                     verbose("Console summoned the light, but I'm not telling anyone!");
+                }
+                else if (broadcastMessages){
+				    getServer().broadcastMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleSummon"));
+                }
+                else {
+                    sender.sendMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleSummon"));
+                }
 			}
 			return true;
 		}
@@ -82,7 +93,15 @@ public class Day extends JavaPlugin {
 				for (World world : getServer().getWorlds()){
 					world.setTime(evening); 
 				}
-				this.getServer().broadcastMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleBanish"));
+                if (stfu){
+                    verbose("Console banished the daystar, but I'm keeping quiet about it.");
+                }
+                else if (broadcastMessages){
+				    this.getServer().broadcastMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleBanish"));
+                }
+                else {
+                    sender.sendMessage(ChatColor.DARK_PURPLE+cfg.tr("consoleBanish"));
+                }
 			}
 			return true;
 		}
@@ -102,9 +121,19 @@ public class Day extends JavaPlugin {
 		}
 	}
 	public void broadcast(Player player,String whatHeDid){
-		for (Player playerOnline : player.getWorld().getPlayers()){
-			playerOnline.sendMessage(ChatColor.DARK_PURPLE+player.getName()+" "+whatHeDid);
-		}
+        boolean broadcastMessages = cfg.get().getBoolean("broadcastMessages",true);
+        boolean stfu = cfg.get().getBoolean("stfu",false);
+        if (stfu){
+            verbose(player.getName()+" "+whatHeDid+" (But I stfu about it!)");
+        }
+        else if (broadcastMessages){
+		    for (Player playerOnline : player.getWorld().getPlayers()){
+			    playerOnline.sendMessage(ChatColor.DARK_PURPLE+player.getName()+" "+whatHeDid);
+		    }
+        }
+        else {
+            player.sendMessage(ChatColor.DARK_PURPLE+player.getName()+" "+whatHeDid);
+        }
 	}
 	private boolean throttle(Player player) {
 	    boolean timeOK = false;

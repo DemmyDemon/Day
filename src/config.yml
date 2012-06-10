@@ -1,4 +1,6 @@
 verbose: false
+broadcastMessages: true
+stfu: false
 throttleSeconds: 10 
 morning: 250
 evening: 14250
