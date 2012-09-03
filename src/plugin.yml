@@ -1,6 +1,6 @@
 name: Day
 main: com.webkonsept.bukkit.day.Day
-version: 0.7.0-beta1
+version: 0.8
 branch: unstable
 thread: http://forums.bukkit.org/threads/Day.24011/
 website: http://minecraft.webkonsept.com/plugins/details/Day.html
@@ -16,6 +16,12 @@ commands:
     night:
         description: Plunges the world into darkness
         usage: /<command> (takes no arguments)
+    aziz:
+        description: AZIZ!  LIGHT!  Makes it day just for you, and stickies it.
+        usage: /<command> (takes no argument, toggles)
+    zorg:
+        description:  Jean-Baptiste Emanuel Zorg makes your world very dark in deed!
+        usage: /<command> (takes no argument, toggles)
 permissions:
     day.*:
         description: Gives full access
@@ -23,11 +29,15 @@ permissions:
             day.command.day: true
             day.command.night: true
             day.command.reload: true
+            day.command.aziz: true
+            day.command.zorg: true
     day.user:
         description: Gives just day/night access
         children:
             day.command.day: true
             day.command.night: true
+            day.command.aziz: true
+            day.command.zorg: true
     day.command.day:
         description: Gives access to the /day command
         default: op
@@ -37,6 +47,12 @@ permissions:
     day.command.reload:
         description: Gives access to the /dayreload command
         default: op
+    day.command.aziz:
+        description: Gives access to "sticky day", or "AZIZ! LIGHT! mode"
+        default: true
+    day.command.zorg:
+        description: Gives access to "sticky night", or "Zorg mode"
+        default: true
 categories: [MECH]
 description: Manipulates the rotation of the planet, turning night into day!
 maintainer: DemmyDemon

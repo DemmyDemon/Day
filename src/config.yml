@@ -12,3 +12,6 @@ strings:
     consoleBanish: All worlds plunged into darkness.
     commandDenied: Permission denied!
     commandReloaded: Reloaded configuration!
+    zorgTime: It is the dawning of an endless night.
+    azizTime: AZIZ! LIGHT!
+    normalTime: Time cycle returned to normal.
